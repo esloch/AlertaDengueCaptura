@@ -1,36 +1,38 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 Este script captura series de tweets do servidor do observatório da dengue em vários municipios.
-
 Deve ser usado apenas para captura "manual" de tweets, para captura automática via CRON use o script pegatweets do pacote
 crawlclima.
-
-
 Copyright 2014 by Flávio Codeço Coelho
 license: GPL v3
 """
-import sys, os
 import argparse
 import datetime
-sys.path.append(os.getcwd())
+import os
+import sys
 
 from crawlclima.tasks import pega_tweets
 
+project_root = os.path.dirname((os.path.abspath(__file__)))
+sys.path.append(project_root)
+
 
 with open("municipios") as f:
-    municipios = f.read().split('\n')
+    municipios = f.read().split("\n")
 
 
-date = lambda d: datetime.date.fromordinal(datetime.datetime.strptime(d, "%Y-%m-%d").toordinal())
+date = lambda d: datetime.date.fromordinal(
+    datetime.datetime.strptime(d, "%Y-%m-%d").toordinal()
+)
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--inicio", "-i", type=date, help="Data inicial de captura: yyyy-mm-dd")
+parser.add_argument(
+    "--inicio", "-i", type=date, help="Data inicial de captura: yyyy-mm-dd"
+)
 parser.add_argument("--fim", "-f", type=date, help="Data final de captura: yyyy-mm-dd")
 args = parser.parse_args()
 
 start, end = args.inicio, args.fim
 
 pega_tweets(start.isoformat(), fim=end.isoformat(), cidades=municipios, CID10="A90")
-
-

@@ -2,4 +2,4 @@
 # m h  dom mon dow   command
 * * * * * root bash /activate.sh /AlertaDengueCaptura/crawlclima/pegatweets.py >> /var/log/cron.log
 *0 23 * * * root bash /activate.sh /AlertaDengueCaptura/crawlclima/capturachuva.py >> /var/log/cron.log
-0 21 * * * root bash /activate.sh /AlertaDengueCaptura/crawlclima/pegatemperatura.py >> /var/log/cron.log
+* * * * * root bash /activate.sh /AlertaDengueCaptura/crawlclima/pegatemperatura.py >> /var/log/cron.log
