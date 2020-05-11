@@ -7,8 +7,7 @@ but this script will actually be executed by cron
 """
 import os, sys
 from datetime import datetime, timedelta, date
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
+sys.path.append(os.getcwd())
 
 from crawlclima.tasks import pega_dados_cemaden, mock
 

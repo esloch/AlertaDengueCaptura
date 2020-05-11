@@ -10,9 +10,10 @@ crawlclima.
 Copyright 2014 by Flávio Codeço Coelho
 license: GPL v3
 """
+import sys, os
 import argparse
 import datetime
-
+sys.path.append(os.getcwd())
 
 from crawlclima.tasks import pega_tweets
 

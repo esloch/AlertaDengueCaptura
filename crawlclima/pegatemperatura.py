@@ -7,8 +7,7 @@ veja crontab para saber como executar este script
 import sys
 import os
 from datetime import datetime, timedelta
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
+sys.path.append(os.getcwd())
 
 from crawlclima.tasks import fetch_redemet
 from utilities.models import find_all
