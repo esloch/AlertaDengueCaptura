@@ -1,0 +1,21 @@
+name: alertacapture
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+- pip
+- rasterio
+- pandas
+- geopandas
+- imageio
+- shapely
+- xarray
+- netCDF4
+- geoviews
+- rasterstats
+- rasterio   
+- earthengine-api
+- pydrive
+
+- pip:
+  - cartopy

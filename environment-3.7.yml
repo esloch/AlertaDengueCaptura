@@ -17,6 +17,7 @@ dependencies:
 - pandasql
 - celery
 - tornado
+- python-dotenv
 
 - pip:
     - odo

@@ -22,7 +22,7 @@ RUN conda config --add channels conda-forge \
 
 # Copy environment file to tmp/
 ARG PYTHON_VERSION
-COPY /environment-${PYTHON_VERSION}.yml /tmp/environment.yml
+COPY /environment-3.7.yml /tmp/environment.yml
 COPY /environment-downloader.yml  /tmp/environment-downloader.yml
 
 # Use environment to update the env base
