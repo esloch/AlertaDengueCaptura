@@ -1,8 +1,9 @@
-name: alertacapture
+name: satellites
 channels:
   - conda-forge
   - defaults
 dependencies:
+- python=3.7
 - pip
 - rasterio
 - pandas
@@ -13,9 +14,13 @@ dependencies:
 - netCDF4
 - geoviews
 - rasterstats
-- rasterio   
 - earthengine-api
 - pydrive
+- sqlalchemy
+- celery
+- python-dotenv
+- descartes
+- docker-compose
 
 - pip:
   - cartopy
