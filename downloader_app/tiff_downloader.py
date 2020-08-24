@@ -22,12 +22,14 @@ from pydrive.drive import GoogleDrive
 from rasterio.warp import Resampling, reproject
 from sqlalchemy import create_engine
 
+from downloader_app.settings import BASE_DIR
+
 # instantiate
 config = ConfigParser()
 # parse existing file
-config.read("settings.ini")
+config.read(os.path.join(BASE_DIR, "downloader_app", "settings.ini"))
 # read values
-PATH = config.get("settings", "path")
+PATH = config.get('settings', 'path')
 
 # Initialize Google Earth Engine.
 ee.Initialize()
