@@ -32,14 +32,15 @@ except Exception as e:
 app.conf.update(CELERY_ALWAYS_EAGER=True)
 
 
+@unittest.skip("reason='Enable base_demo for testing'")
 class TestTasks(unittest.TestCase):
+
     def setUp(self):
         self.cur = conn.cursor()
 
     def tearDown(self):
         self.cur.close()
 
-    @unittest.skip("reason='...'")
     def test_pega_novos_dados_cemaden(self):
         self.cur.execute(
             'select datahora from "Municipio"."Clima_cemaden" order by datahora DESC ;'
@@ -51,7 +52,6 @@ class TestTasks(unittest.TestCase):
         self.assertEquals(res, 200)
         self.assertGreaterEqual(len(resp), 0)
 
-    @unittest.skip("reason='...'")
     def test_tries_to_fetch_data_which_is_already_in_DB(self):
         res = pega_dados_cemaden("RJ", "201508100000", "201508120000")
         self.cur.execute('select * from "Municipio"."Clima_cemaden";')
