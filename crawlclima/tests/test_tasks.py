@@ -39,6 +39,7 @@ class TestTasks(unittest.TestCase):
     def tearDown(self):
         self.cur.close()
 
+    @unittest.skip("reason='...'")
     def test_pega_novos_dados_cemaden(self):
         self.cur.execute(
             'select datahora from "Municipio"."Clima_cemaden" order by datahora DESC ;'
@@ -50,6 +51,7 @@ class TestTasks(unittest.TestCase):
         self.assertEquals(res, 200)
         self.assertGreaterEqual(len(resp), 0)
 
+    @unittest.skip("reason='...'")
     def test_tries_to_fetch_data_which_is_already_in_DB(self):
         res = pega_dados_cemaden("RJ", "201508100000", "201508120000")
         self.cur.execute('select * from "Municipio"."Clima_cemaden";')
@@ -61,7 +63,7 @@ class TestTasks(unittest.TestCase):
         res = pega_tweets("2015-01-01", "2015-08-07", ["3304557", "3303302"])
         self.cur.execute('select * from "Municipio"."Tweet";')
         resp = self.cur.fetchall()
-        self.assertEquals(res, 200)
+        self.assertEqual(res, 200)
         self.assertGreater(len(resp), 0)
 
 

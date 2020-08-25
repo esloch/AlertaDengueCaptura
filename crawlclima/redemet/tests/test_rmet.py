@@ -70,12 +70,12 @@ class TestCapture(unittest.TestCase):
         ) as fd:
             response_text = fd.read()
 
-        station_code = "SBSR"
+        station_code = "SBAF"
         date = datetime.today() - timedelta(3)
 
         url_pattern = re.compile(
             r'https://api-redemet\.decea\.gov\.br/mensagens/metar/'
-            r'SBSR\?api_key=.*data_ini=.*data_fim=.*'
+            r'SBAF\?api_key=.*data_ini=.*data_fim=.*'
         )
 
         responses.add(
@@ -84,7 +84,7 @@ class TestCapture(unittest.TestCase):
 
         data = capture_date_range(station_code, date)
         self.assertIsInstance(data, list)
-        self.assertEqual(len(responses.calls), 2)
+        self.assertEqual(len(responses.calls), 4)
 
     def test_check_day(self):
         pass

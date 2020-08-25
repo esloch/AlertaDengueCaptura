@@ -19,7 +19,7 @@ stop:
 install:
 	pip install -e .['develop']
 
-test:
+test_crawlclima:
 	pytest crawlclima/ -v
 
 clean:
