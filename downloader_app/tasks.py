@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 from downloader_app import tiff_downloader as td
 from downloader_app.celeryapp import app
-from downloader_app.utils import ee_authenticate
+from downloader_app.config import ee_authenticate
 
 load_dotenv()
 

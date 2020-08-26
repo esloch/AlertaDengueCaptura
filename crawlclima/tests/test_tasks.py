@@ -34,7 +34,6 @@ app.conf.update(CELERY_ALWAYS_EAGER=True)
 
 @unittest.skip("reason='Enable base_demo for testing'")
 class TestTasks(unittest.TestCase):
-
     def setUp(self):
         self.cur = conn.cursor()
 

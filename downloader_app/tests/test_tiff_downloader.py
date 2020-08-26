@@ -10,7 +10,6 @@ import downloader_app.tiff_downloader as td
 from downloader_app import shapefile_module as shpm
 from downloader_app.settings import BASE_DIR
 
-
 local = os.path.join(BASE_DIR, "downloader_app")
 sys.path.insert(0, local)
 
@@ -22,11 +21,14 @@ path_downloadfiles = os.path.join(
 
 # url responsible for identifying the source.
 source_url = {
-    'LandDAAC-v5-day': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.1km/.8day/.version_005/.Terra/.SSA/.Day/.LST/(Celsius)/unitconvert/",
-    'LandDAAC-v5-night': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.1km/.8day/.version_005/.Terra/.SSA/.Night/.LST/(Celsius)/unitconvert/",
+    'LandDAAC-v5-day': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.1km/.8day/.version_005/"
+    ".Terra/.SSA/.Day/.LST/(Celsius)/unitconvert/",
+    'LandDAAC-v5-night': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.1km/.8day/.version_005/"
+    ".Terra/.SSA/.Night/.LST/(Celsius)/unitconvert/",
     'LandDAAC-v6-EVI': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.version_006/.SSA/.EVI/",
     'LandDAAC-v6-NDVI': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.version_006/.SSA/.NDVI/",
-    'LandDAAC-v6-view_zenith_angle': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.version_006/.SSA/.view_zenith_angle/",
+    'LandDAAC-v6-view_zenith_angle': "http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.version_006/"
+    ".SSA/.view_zenith_angle/",
 }
 
 # Get source_url status code.
@@ -40,6 +42,7 @@ def test_get_url():
             status
         )
 
+
 # Download raster data.
 def test_downloader_raster():
     # Extract bounding box from shapefile.
@@ -50,7 +53,7 @@ def test_downloader_raster():
         'plot': False,
         'keep_original': True,
         'regrid': [3, 'bilinear'],
-        'close_browser': False,
+        'close_browser': True,
     }
     td.download_tiffs(source, dates, point1, point2, opt=options)
     # Checks at source if tiff files were generated.
@@ -59,6 +62,7 @@ def test_downloader_raster():
         'LandDAAC-v5-day-2016-07-20.tiff',
         'LandDAAC-v5-day-2016-07-20-treated.tiff',
     ]
+
 
 # Download more raster files and test the creation of the netcdf file.
 def test_LandDAAC_v5_night():
@@ -70,7 +74,7 @@ def test_LandDAAC_v5_night():
         'regrid': [3, 'cubic'],
         'keep_original': False,
         'time_series': True,
-        'close_browser': False,
+        'close_browser': True,
     }
     td.download_tiffs(source, dates, point1, point2, opt=options)
 

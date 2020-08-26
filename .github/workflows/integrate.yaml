@@ -44,3 +44,7 @@ jobs:
     - name: Tests Crawclima
       run: |
         make test_crawlclima
+
+    - name: Tests Downloader_app
+      run: |
+        make test_downloader_app
