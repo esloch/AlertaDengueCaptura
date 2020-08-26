@@ -87,9 +87,7 @@ if not os.path.exists(MYCREDS_PATH):
 # Create credentials in BASE_DIR
 if not os.path.exists(TOKEN_PATH):
     token_info = {
-        {
-            "refresh_token": os.environ.get('REFRESH_TOKEN'),
-        }
+        "refresh_token": os.environ.get('REFRESH_TOKEN'),
     }
 
     with open(os.path.join(TOKEN_PATH), 'w') as f:
