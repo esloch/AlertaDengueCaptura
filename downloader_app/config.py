@@ -19,6 +19,7 @@ DOWNLADER_PATH = os.path.join(BASE_DIR, 'downloader_app')
 SETTINGS_PATH = os.path.join(DOWNLADER_PATH, 'settings.yaml')
 MYCREDS_PATH = os.path.join(DOWNLADER_PATH, 'mycreds.txt')
 SECRETS_PATH = os.path.join(BASE_DIR, 'client_secrets.json')
+TOKEN_PATH = os.path.join(BASE_DIR, 'credentials')
 
 
 # create yaml file
@@ -82,3 +83,15 @@ if not os.path.exists(MYCREDS_PATH):
         f.write("")
         f.close()
         print("The mycreds.txt file has ben created!")
+
+# Create credentials in BASE_DIR
+if not os.path.exists(TOKEN_PATH):
+    token_info = {
+        {
+            "refresh_token": os.environ.get('REFRESH_TOKEN'),
+        }
+    }
+
+    with open(os.path.join(TOKEN_PATH), 'w') as f:
+        json.dump(token_info, f)
+        print("The credentials file has ben created!")
