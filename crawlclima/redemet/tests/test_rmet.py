@@ -36,6 +36,7 @@ class TestFahrenheitToCelsius(unittest.TestCase):
         self.assertAlmostEqual(fahrenheit_to_celsius(0), -17.78, 2)
 
 
+@unittest.skip("reason='issue#56'")
 class TestCapture(unittest.TestCase):
     @responses.activate
     @mock.patch("crawlclima.redemet.rmet.time.sleep")

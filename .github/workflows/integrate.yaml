@@ -45,6 +45,18 @@ jobs:
       run: |
         make test_crawlclima
 
+    - name: Configure credentials to downloader_app
+      env:
+        CLIENT_ACCOUNT_ID: ${{ secrets.CLIENT_ACCOUNT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        pip3 install earthengine-api
+        earthengine authenticate
+        make configure_downloader_app
+
     - name: Tests Downloader_app
       run: |
         make test_downloader_app

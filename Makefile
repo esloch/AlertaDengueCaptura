@@ -20,7 +20,7 @@ install:
 	pip install -e .['develop']
 
 test_crawlclima:
-	# Ignore tests in database, waiting to resolve db_demo issue#
+	# Ignore tests in database, reason issue#56
 	pytest -v crawlclima --ignore=crawlclima/tests/test_tasks.py
 
 test_downloader_app:
