@@ -54,8 +54,8 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
       run: |
-        pip install earthengine-api
         make configure_downloader_app
+        make deploy
 
     - name: Tests Downloader_app
       run: |
