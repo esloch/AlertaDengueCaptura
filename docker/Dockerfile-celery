@@ -31,7 +31,9 @@ RUN conda env update --file /tmp/environment.yml --name base \
   && conda clean -afy
 
 # Files
-COPY /requirements.txt /tweets.py /clima.py /setup.py /README.md /requirements-dev.txt /AlertaDengueCaptura/
+COPY /requirements.txt /tweets.py /clima.py /setup.py /README.md \
+     /requirements-dev.txt /example_env_file /AlertaDengueCaptura/
+
 # Paste credentials validation in command line and copy to container
 COPY /credentials /root/.config/earthengine/credentials
 
