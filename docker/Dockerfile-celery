@@ -22,20 +22,18 @@ RUN conda config --add channels conda-forge \
 
 # Copy environment file to tmp/
 ARG PYTHON_VERSION
-COPY /environment-${PYTHON_VERSION}.yml /tmp/environment.yml
-COPY /environment-satellite.yml  /tmp/environment-satellite.yml
+COPY environment-${PYTHON_VERSION}.yml /tmp/environment.yml
 
 # Use environment to update the env base
 RUN conda env update --file /tmp/environment.yml --name base \
-  && conda env update --file /tmp/environment-satellite.yml --name base \
   && conda clean -afy
 
 # Files
-COPY /requirements.txt /tweets.py /clima.py /setup.py /README.md \
-     /requirements-dev.txt /example_env_file /AlertaDengueCaptura/
+COPY requirements.txt tweets.py clima.py setup.py README.md \
+     requirements-dev.txt example_env_file /AlertaDengueCaptura/
 
 # Paste credentials validation in command line and copy to container
-COPY /credentials /root/.config/earthengine/credentials
+COPY credentials /root/.config/earthengine/credentials
 
 # Prepare cron tasks
 COPY docker/cron_tasks /etc/cron.d/cron_tasks

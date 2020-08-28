@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
     capture_rabbitmq:
       image: rabbitmq:3

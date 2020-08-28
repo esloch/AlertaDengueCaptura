@@ -273,7 +273,7 @@ def single_download_LandDAAC(source, date1, date2, x1, x2, y1, y2, opt):
     path_tmp = os.path.join(PATH, source)
     exists = os.path.exists(path_tmp)
     if not exists:
-        os.makedirs(path_tmp)
+        os.makedirs(path_tmp, mode=0o775, exist_ok=True)
     # Path to the file.
     path = os.path.join(path_tmp, filename)
 

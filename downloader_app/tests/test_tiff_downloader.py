@@ -6,18 +6,16 @@ import pytest
 import requests
 from netCDF4 import Dataset
 
-import downloader_app.tiff_downloader as td
 from downloader_app import shapefile_module as shpm
+from downloader_app import tiff_downloader as td
 from downloader_app.settings import BASE_DIR
 
-local = os.path.join(BASE_DIR, "downloader_app")
-sys.path.insert(0, local)
+LOCAL = os.path.join(BASE_DIR, "downloader_app")
+sys.path.insert(0, LOCAL)
 
 # Set the filepath and load in a shapefile.
-shp_path = os.path.join(local, "RJ_Mun97_region/RJ_Mun97_region.shp")
-path_downloadfiles = os.path.join(
-    BASE_DIR, "downloader_app", "DownloadedFiles"
-)
+SHP_PATH = os.path.join(LOCAL, "RJ_Mun97_region/RJ_Mun97_region.shp")
+DOWNLOADFILES_PATH = os.path.join(LOCAL, "DownloadedFiles")
 
 # url responsible for identifying the source.
 source_url = {
@@ -44,10 +42,11 @@ def test_get_url():
 
 
 # Download raster data.
-def test_downloader_raster():
+def test_downloader_tiff():
     # Extract bounding box from shapefile.
-    point1, point2 = shpm.extract_shp_boundingbox(shp_path)
+    point1, point2 = shpm.extract_shp_boundingbox(SHP_PATH)
     source = 'LandDAAC-v5-day'
+    print(os.getcwd())
     dates = pd.date_range('2016-07-20', '2016-07-20')
     options = {
         'plot': False,
@@ -57,7 +56,7 @@ def test_downloader_raster():
     }
     td.download_tiffs(source, dates, point1, point2, opt=options)
     # Checks at source if tiff files were generated.
-    files = os.listdir(os.path.join(path_downloadfiles, 'LandDAAC-v5-day'))
+    files = os.listdir(os.path.join(DOWNLOADFILES_PATH, 'LandDAAC-v5-day'))
     assert files == [
         'LandDAAC-v5-day-2016-07-20.tiff',
         'LandDAAC-v5-day-2016-07-20-treated.tiff',
@@ -68,7 +67,7 @@ def test_downloader_raster():
 def test_LandDAAC_v5_night():
     source = 'LandDAAC-v5-night'
     dates = pd.date_range('2016-07-20', '2016-10-30', freq='8D')
-    point1, point2 = shpm.extract_shp_boundingbox(shp_path)
+    point1, point2 = shpm.extract_shp_boundingbox(SHP_PATH)
     # Allow time_series to create a netcdf file
     options = {
         'regrid': [3, 'cubic'],
