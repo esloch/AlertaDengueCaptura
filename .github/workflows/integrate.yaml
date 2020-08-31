@@ -51,7 +51,6 @@ jobs:
 
     - name: Configure credentials to downloader_app
       env:
-      env:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         PROJECT_ID: ${{ secrets.PROJECT_ID }}
