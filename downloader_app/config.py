@@ -27,7 +27,7 @@ if not os.path.exists(SETTINGS_PATH):
     settings_yaml = {
         'client_config_backend': 'settings',
         'client_config': {
-            'client_id': os.environ.get('CLIENT_ACCOUNT_ID'),
+            'client_id': os.environ.get('CLIENT_ID'),
             'client_secret': os.environ.get('CLIENT_SECRET'),
             'auth_uri': "https://accounts.google.com/o/oauth2/auth",
             'token_uri': "https://oauth2.googleapis.com/token",
@@ -72,15 +72,42 @@ if not os.path.exists(SECRETS_PATH):
             ],
         }
     }
-
     with open(os.path.join(SECRETS_PATH), 'w') as f:
         json.dump(credentials_info, f)
         print("The client_secrets.json file has ben created!")
 
 # Create mycreds in downloader_app directory
 if not os.path.exists(MYCREDS_PATH):
+    mycreds_info = {
+        "access_token": os.environ.get('ACCESS_TOKEN'),
+        "client_id": os.environ.get('CLIENT_ID'),
+        "client_secret": os.environ.get('CLIENT_SECRET'),
+        "refresh_token": os.environ.get('REFRESH_TOKEN'),
+        "token_expiry": "2020-10-31T23:36:20Z",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "user_agent": "null",
+        "revoke_uri": "https://oauth2.googleapis.com/revoke",
+        "id_token": "null",
+        "id_token_jwt": "null",
+        "token_response": {
+            "access_token": os.environ.get('ACCESS_TOKEN'),
+            "scope": "https://www.googleapis.com/auth/drive",
+            "token_type": "Bearer",
+        },
+        "scopes": ["https://www.googleapis.com/auth/drive"],
+        "token_info_uri": "https://oauth2.googleapis.com/tokeninfo",
+        "invalid": False,
+        "_class": "OAuth2Credentials",
+        "_module": "oauth2client.client",
+    }
     with open(os.path.join(MYCREDS_PATH), 'w') as f:
-        f.write("")
+
+        class to_str(dict):
+            def __str__(self):
+                return json.dumps(self)
+
+        mycreds_str = to_str(mycreds_info)
+        f.write(str(mycreds_str))
         f.close()
         print("The mycreds.txt file has ben created!")
 
@@ -89,7 +116,6 @@ if not os.path.exists(TOKEN_PATH):
     token_info = {
         "refresh_token": os.environ.get('REFRESH_TOKEN'),
     }
-
     with open(os.path.join(TOKEN_PATH), 'w') as f:
         json.dump(token_info, f)
         print("The credentials file has ben created!")

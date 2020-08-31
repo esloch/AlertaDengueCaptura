@@ -33,14 +33,26 @@ PATH = config.get('settings', 'path')
 
 # Initialize Google Earth Engine.
 ee.Initialize()
-# Iinitialize (authenticate) Google Driver.
+
+# Initialize (authenticate) Google Driver.
 gauth = GoogleAuth()
 # Try to load saved client credentials
 gauth.LoadCredentialsFile("downloader_app/mycreds.txt")
-gauth.LocalWebserverAuth()
+if gauth.credentials is None:
+    # Authenticate if they're not there
+    gauth.LocalWebserverAuth()
+elif gauth.access_token_expired:
+    # Refresh them if expired
+    print("Google Drive Token Expired, Refreshing")
+    gauth.Refresh()
+else:
+    # Initialize the saved creds
+    gauth.Authorize()
 # Save the current credentials to a file
 gauth.SaveCredentialsFile("downloader_app/mycreds.txt")
+
 drive = GoogleDrive(gauth)
+
 # Avoid displaying some log warnings. See https://github.com/googleapis/google-api-python-client/issues/299.
 logging.getLogger("googleapiclient.discovery_cache").setLevel(logging.ERROR)
 
