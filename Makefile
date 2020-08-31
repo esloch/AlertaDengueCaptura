@@ -24,10 +24,10 @@ test_crawlclima:
 	pytest -v crawlclima --ignore=crawlclima/tests/test_tasks.py
 
 test_downloader_app:
-	pytest downloader_app/ -v
+	pytest downloader_app/ -vv
 
-configure_downloader_app:
-	python downloader_app/config.py
+configure_ci_downloader_app:
+	python downloader_app/ci/config.py
 
 clean:
 	@find ./ -name '*.pyc' -exec rm -f {} \;
