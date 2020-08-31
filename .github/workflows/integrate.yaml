@@ -51,14 +51,16 @@ jobs:
 
     - name: Configure credentials to downloader_app
       env:
-        CLIENT_ACCOUNT_ID: ${{ secrets.CLIENT_ACCOUNT_ID }}
-        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        REFRESH_TOKEN: ${{ secrets.SETTINGS_YAML }}
+        CLIENT_ID: ${{ secrets.CREDENTIALS_INFO }}
+        CLIENT_SECRET: ${{ secrets.MYCREDS_INFO }}
+        PROJECT_ID: ${{ secrets.REFRESH_TOKEN }}
+
       run: |
         make configure_downloader_app
+
+    - name: Make deploy
+      run: |
         make deploy
 
     - name: Tests Downloader_app
