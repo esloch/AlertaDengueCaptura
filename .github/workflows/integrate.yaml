@@ -29,7 +29,7 @@ jobs:
       with:
         auto-update-conda: true
         python-version: ${{ matrix.python-version }}
-        activate-environment: alertadenguecaptura
+        activate-environment: alertacapture
         environment-file: environment-3.7.yml
         channels: conda-forge
 
@@ -70,4 +70,6 @@ jobs:
     - name: Tests Downloader_app
       shell: bash -l {0}
       run: |
+        conda info
+        conda list
         make test_downloader_app
