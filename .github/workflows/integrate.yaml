@@ -66,8 +66,6 @@ jobs:
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
       run: |
         make configure_ci_downloader_app
-        pwd
-        ls -la
         mkdir -p /home/runner/.config/earthengine/
         cp credentials /home/runner/.config/earthengine/credentials
 

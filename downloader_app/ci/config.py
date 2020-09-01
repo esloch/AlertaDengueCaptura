@@ -42,7 +42,7 @@ if not os.path.exists(SETTINGS_PATH):
         'save_credentials': True,
         'save_credentials_backend': 'file',
         'save_credentials_file': 'credentials.json',
-        'get_refresh_token': True,
+        'get_refresh_token': False,
         'oauth_scope': [
             'https://www.googleapis.com/auth/drive',
             "https://accounts.google.com/o/oauth2/auth",
@@ -53,7 +53,7 @@ if not os.path.exists(SETTINGS_PATH):
     with open(os.path.join(SETTINGS_PATH), 'w') as f:
         yaml.dump(settings_yaml, f, default_flow_style=False)
 
-    print("The settings.yamlfile has been created!")
+    print("The settings.yaml file has been created!")
 
 # Create client_secrets.json in downloader_app directory
 if not os.path.exists(SECRETS_PATH):
@@ -82,8 +82,37 @@ if not os.path.exists(SECRETS_PATH):
 
 # Create mycreds in downloader_app directory
 if not os.path.exists(MYCREDS_PATH):
+    mycreds_info = {
+        "access_token": os.getenv('ACCESS_TOKEN'),
+        "client_id": os.getenv('CLIENT_ID'),
+        "client_secret": os.getenv('CLIENT_SECRET'),
+        "refresh_token": os.getenv('REFRESH_TOKEN'),
+        "token_expiry": "2020-12-31T23:36:20Z",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "user_agent": "null",
+        "revoke_uri": "https://oauth2.googleapis.com/revoke",
+        "id_token": "null",
+        "id_token_jwt": "null",
+        "token_response": {
+            "access_token": os.getenv('ACCESS_TOKEN'),
+            # "expires_in": 3599,
+            "scope": "https://www.googleapis.com/auth/drive",
+            "token_type": "Bearer",
+        },
+        "scopes": ["https://www.googleapis.com/auth/drive"],
+        "token_info_uri": "https://oauth2.googleapis.com/tokeninfo",
+        "invalid": False,
+        "_class": "OAuth2Credentials",
+        "_module": "oauth2client.client",
+    }
     with open(os.path.join(MYCREDS_PATH), 'w') as f:
-        f.write("")
+
+        class to_str(dict):
+            def __str__(self):
+                return json.dumps(self)
+
+        mycreds_str = to_str(mycreds_info)
+        f.write(str(mycreds_str))
         f.close()
         print("The mycreds.txt file has been created!")
 
