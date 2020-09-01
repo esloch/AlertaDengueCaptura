@@ -67,6 +67,8 @@ jobs:
       run: |
         make configure_ci_downloader_app
         pwd
+        ls -la
+        mkdir -p /home/runner/.config/earthengine/
         cp credentials /home/runner/.config/earthengine/credentials
 
     - name: Tests Downloader_app
