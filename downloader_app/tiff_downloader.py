@@ -40,6 +40,10 @@ gauth = GoogleAuth()
 gauth.LoadCredentialsFile("downloader_app/mycreds.txt")
 if gauth.credentials is None:
     # Authenticate if they're not there
+    gauth.GetFlow()
+    gauth.flow.params.update({'access_type': 'offline'})
+    gauth.flow.params.update({'approval_prompt': 'force'})
+
     gauth.LocalWebserverAuth()
 elif gauth.access_token_expired:
     # Refresh them if expired
