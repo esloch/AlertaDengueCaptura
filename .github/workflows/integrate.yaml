@@ -65,9 +65,9 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
       run: |
+        make configure_ci_downloader_app
         mkdir -p /home/runner/.config/earthengine/
         cp credentials /home/runner/.config/earthengine/credentials
-        make configure_ci_downloader_app
 
     - name: Tests Downloader_app
       shell: bash -l {0}
