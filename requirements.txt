@@ -14,3 +14,4 @@ dbfread
 pandasql
 python-metar
 pytest
+PyYAML
