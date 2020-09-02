@@ -31,13 +31,14 @@ if not os.path.exists(SETTINGS_PATH):
         'client_config_backend': 'settings',
         'client_config': {
             'client_id': os.getenv('CLIENT_ID'),
-            'client_secret': os.getenv('CLIENT_SECRET'),
+            'client_secret': os.getenv('CLIENT_SECRETS'),
             'auth_uri': "https://accounts.google.com/o/oauth2/auth",
             'token_uri': "https://oauth2.googleapis.com/token",
             'redirect_uri': [
                 "http://localhost:8090/",
                 "http://localhost:8080/",
             ],
+            'response_type': 'code',
         },
         'save_credentials': True,
         'save_credentials_backend': 'file',
@@ -64,7 +65,7 @@ if not os.path.exists(SECRETS_PATH):
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_secret": os.getenv('CLIENT_SECRET'),
+            "client_secret": os.getenv('CLIENT_SECRETS'),
             "redirect_uris": [
                 "http://localhost:8090/",
                 "http://localhost:8080/",
@@ -85,7 +86,7 @@ if not os.path.exists(MYCREDS_PATH):
     mycreds_info = {
         "access_token": os.getenv('ACCESS_TOKEN'),
         "client_id": os.getenv('CLIENT_ID'),
-        "client_secret": os.getenv('CLIENT_SECRET'),
+        "client_secret": os.getenv('CLIENT_SECRETS'),
         "refresh_token": os.getenv('REFRESH_TOKEN'),
         "token_expiry": "2020-12-31T23:36:20Z",
         "token_uri": "https://oauth2.googleapis.com/token",
