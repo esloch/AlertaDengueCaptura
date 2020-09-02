@@ -31,7 +31,7 @@ if not os.path.exists(SETTINGS_PATH):
         'client_config_backend': 'settings',
         'client_config': {
             'client_id': os.getenv('CLIENT_ID'),
-            'client_secret': os.getenv('CLIENT_SECRETS'),
+            'client_secret': os.getenv('CLIENT_SECRET'),
             'auth_uri': "https://accounts.google.com/o/oauth2/auth",
             'token_uri': "https://oauth2.googleapis.com/token",
             'redirect_uri': [
@@ -43,7 +43,7 @@ if not os.path.exists(SETTINGS_PATH):
         'save_credentials': True,
         'save_credentials_backend': 'file',
         'save_credentials_file': 'credentials.json',
-        'get_refresh_token': False,
+        'get_refresh_token': True,
         'oauth_scope': [
             'https://www.googleapis.com/auth/drive',
             "https://accounts.google.com/o/oauth2/auth",
@@ -65,7 +65,7 @@ if not os.path.exists(SECRETS_PATH):
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_secret": os.getenv('CLIENT_SECRETS'),
+            "client_secret": os.getenv('CLIENT_SECRET'),
             "redirect_uris": [
                 "http://localhost:8090/",
                 "http://localhost:8080/",
@@ -86,7 +86,7 @@ if not os.path.exists(MYCREDS_PATH):
     mycreds_info = {
         "access_token": os.getenv('ACCESS_TOKEN'),
         "client_id": os.getenv('CLIENT_ID'),
-        "client_secret": os.getenv('CLIENT_SECRETS'),
+        "client_secret": os.getenv('CLIENT_SECRET'),
         "refresh_token": os.getenv('REFRESH_TOKEN'),
         "token_expiry": "2020-12-31T23:36:20Z",
         "token_uri": "https://oauth2.googleapis.com/token",
@@ -122,7 +122,15 @@ if not os.path.exists(TOKEN_PATH):
     token_info = {
         "refresh_token": os.getenv('REFRESH_TOKEN'),
     }
-
     with open(os.path.join(TOKEN_PATH), 'w') as f:
-        json.dump(token_info, f)
+
+        class to_str(dict):
+            def __str__(self):
+                return json.dumps(self)
+
+        token_str = to_str(token_info)
+        f.write(str(token_str))
+        print(token_str)
+        f.close()
+        # json.dump(token_info, f)
         print("The credentials file has been created!")

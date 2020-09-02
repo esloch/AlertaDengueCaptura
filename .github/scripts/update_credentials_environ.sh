@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 
-# CLIENT_SECRETS = '*'
-sed -i -e "s|^CLIENT_SECRETS=.*$|CLIENT_SECRETS=$CLIENT_SECRETS|g" .env
+# CLIENT_SECRET = '*'
+sed -i -e "s|^CLIENT_SECRET=.*$|CLIENT_SECRET=$CLIENT_SECRET|g" .env
 # CLIENT_ID='*'
 sed -i -e "s|^CLIENT_ID=.*$|CLIENT_ID=$CLIENT_ID|g" .env
 # PROJECT_ID='*'
