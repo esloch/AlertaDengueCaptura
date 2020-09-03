@@ -6,11 +6,12 @@ folium
 bearcart
 bokeh
 psycopg2
-pgcli
 sqlsoup
 odo
 geojson
-python-decouple
+python-dotenv
 dbfread
 pandasql
 python-metar
+pytest
+PyYAML

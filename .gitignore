@@ -67,3 +67,11 @@ target/
 settings.ini
 .env
 .idea/
+*.ini
+
+/docker/dev_dumps/
+*.gz
+.vscode
+
+# EarthEngine
+DownloadedFiles/*
