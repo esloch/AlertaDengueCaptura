@@ -9,6 +9,7 @@ from downloader_app.settings import BASE_DIR
 
 load_dotenv()
 
+'''
 EE_CREDENTIAL_FILE = os.path.join(
     BASE_DIR, 'downloader_app', 'alertadenguecaptura-7ec421287640.json'
 )
@@ -16,42 +17,35 @@ EE_CREDENTIAL_FILE = os.path.join(
 EE_SERVICE_ACCOUNT = (
     'alertadengue-898@alertadenguecaptura.iam.gserviceaccount.com'
 )
-
-
+'''
 DOWNLADER_PATH = os.path.join(BASE_DIR, 'downloader_app')
+
 SETTINGS_PATH = os.path.join(DOWNLADER_PATH, 'settings.yaml')
 MYCREDS_PATH = os.path.join(DOWNLADER_PATH, 'mycreds.txt')
-SECRETS_PATH = os.path.join(BASE_DIR, 'client_secrets.json')
+SECRETS_PATH = os.path.join(DOWNLADER_PATH, 'client_secrets.json')
 TOKEN_PATH = os.path.join(BASE_DIR, 'credentials')
 
 
 # create yaml file
 if not os.path.exists(SETTINGS_PATH):
     settings_yaml = {
-        'client_config_backend': 'settings',
-        'client_config': {
-            'client_id': os.getenv('CLIENT_ID'),
-            'client_secret': os.getenv('CLIENT_SECRET'),
-            'auth_uri': "https://accounts.google.com/o/oauth2/auth",
-            'token_uri': "https://oauth2.googleapis.com/token",
-            'redirect_uri': [
-                "http://localhost:8090/",
-                "http://localhost:8080/",
-            ],
-            'response_type': 'code',
+        "client_config_backend": "settings",
+        "client_config": {
+            'client_id': os.getenv("CLIENT_ID"),
+            'client_secret': os.getenv("CLIENT_SECRET"),
         },
-        'save_credentials': True,
-        'save_credentials_backend': 'file',
-        'save_credentials_file': 'credentials.json',
-        'get_refresh_token': True,
-        'oauth_scope': [
-            'https://www.googleapis.com/auth/drive',
+        "save_credentials": True,
+        "save_credentials_backend": "file",
+        "save_credentials_file": "credentials.json",
+        "get_refresh_token": True,
+        "oauth_scope": [
+            "https://www.googleapis.com/auth/drive",
             "https://accounts.google.com/o/oauth2/auth",
         ],
     }
 
     # Generate configuration file for pyydrive authentication
-    with open(os.path.join(SETTINGS_PATH), 'w') as f:
+    with open(os.path.join(SETTINGS_PATH), "w") as f:
         yaml.dump(settings_yaml, f, default_flow_style=False)
 
     print("The settings.yaml file has been created!")
@@ -60,12 +54,12 @@ if not os.path.exists(SETTINGS_PATH):
 if not os.path.exists(SECRETS_PATH):
     credentials_info = {
         "web": {
-            "client_id": os.getenv('CLIENT_ID'),
-            "project_id": os.getenv('PROJECT_ID'),
+            "client_id": os.getenv("CLIENT_ID"),
+            "project_id": os.getenv("PROJECT_ID"),
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-            "client_secret": os.getenv('CLIENT_SECRET'),
+            "client_secret": os.getenv("CLIENT_SECRET"),
             "redirect_uris": [
                 "http://localhost:8090/",
                 "http://localhost:8080/",
@@ -77,17 +71,17 @@ if not os.path.exists(SECRETS_PATH):
         }
     }
 
-    with open(os.path.join(SECRETS_PATH), 'w') as f:
+    with open(os.path.join(SECRETS_PATH), "w") as f:
         json.dump(credentials_info, f)
         print("The client_secrets.json file has been created!")
 
 # Create mycreds in downloader_app directory
 if not os.path.exists(MYCREDS_PATH):
     mycreds_info = {
-        "access_token": os.getenv('ACCESS_TOKEN'),
-        "client_id": os.getenv('CLIENT_ID'),
-        "client_secret": os.getenv('CLIENT_SECRET'),
-        "refresh_token": os.getenv('REFRESH_TOKEN'),
+        "access_token": os.getenv("ACCESS_TOKEN"),
+        "client_id": os.getenv("CLIENT_ID"),
+        "client_secret": os.getenv("CLIENT_SECRET"),
+        "refresh_token": os.getenv("REFRESH_TOKEN"),
         "token_expiry": "2020-12-31T23:36:20Z",
         "token_uri": "https://oauth2.googleapis.com/token",
         "user_agent": "null",
@@ -95,7 +89,7 @@ if not os.path.exists(MYCREDS_PATH):
         "id_token": "null",
         "id_token_jwt": "null",
         "token_response": {
-            "access_token": os.getenv('ACCESS_TOKEN'),
+            "access_token": os.getenv("ACCESS_TOKEN"),
             # "expires_in": 3599,
             "scope": "https://www.googleapis.com/auth/drive",
             "token_type": "Bearer",
@@ -106,7 +100,7 @@ if not os.path.exists(MYCREDS_PATH):
         "_class": "OAuth2Credentials",
         "_module": "oauth2client.client",
     }
-    with open(os.path.join(MYCREDS_PATH), 'w') as f:
+    with open(os.path.join(MYCREDS_PATH), "w") as f:
 
         class to_str(dict):
             def __str__(self):
@@ -120,7 +114,7 @@ if not os.path.exists(MYCREDS_PATH):
 # Create credentials in BASE_DIR
 if not os.path.exists(TOKEN_PATH):
     token_info = {
-        "refresh_token": os.getenv('REFRESH_TOKEN'),
+        "refresh_token": os.getenv("REFRESH_TOKEN"),
     }
     with open(os.path.join(TOKEN_PATH), 'w') as f:
 

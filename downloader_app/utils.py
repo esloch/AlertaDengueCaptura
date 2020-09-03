@@ -2,6 +2,7 @@ import os
 
 import ee
 
+'''
 from downloader_app.ci.config import EE_CREDENTIAL_FILE, EE_SERVICE_ACCOUNT
 
 
@@ -12,3 +13,4 @@ def ee_authenticate():
         EE_SERVICE_ACCOUNT, EE_CREDENTIAL_FILE
     )
     ee.Initialize(credentials)
+'''
