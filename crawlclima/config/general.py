@@ -1,3 +1,9 @@
+#
+import os
 
-psql_host = "127.0.0.1"
-psql_user = "dengueadmin"
+from dotenv import load_dotenv
+
+load_dotenv()
+
+psql_host = os.getenv("PSQL_HOST")
+psql_user = os.getenv("PSQL_USER")
